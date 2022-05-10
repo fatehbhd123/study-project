@@ -1,0 +1,30 @@
+.welcome {
+    text-align: center;
+    background-color: rgba(234, 255, 238, 1);
+    /* background-image: url("https://www.ibnulyemenarabic.com/wp-content/uploads/2018/11/Islam.jpg");
+    background-repeat: no-repeat;
+    background-size: contain; */
+    border-radius: 10px;
+    color: rgba(69, 176, 158, 1);
+    padding: 30px 25px;
+    border: 2px solid;
+}
+
+.welcome h2 {
+    font-size: 30px;
+}
+
+@media (min-width:426px) {
+    .welcome h2 {
+        font-size: 60px;
+    }
+
+    .welcome {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0 150px;
+        height: calc(100vh - 140px);
+    }
+}

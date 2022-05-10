@@ -1,0 +1,12 @@
+footer {
+    background-color: #45B09E;
+    display: flex;
+    align-items: center;
+    color: white;
+    padding-top: 30px;
+    flex-direction: column;
+}
+
+footer img {
+    height: 80px;
+}
