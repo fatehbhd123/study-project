@@ -1,4 +1,4 @@
-import { AddBox } from '@mui/icons-material'
+import { AddBox, ExitToApp } from '@mui/icons-material'
 import React, { useState } from 'react'
 import logoWhite from '../logo/منهاج المسلم White.png'
 import logoGrenn from "../logo/منهاج المسلم Green.png"
@@ -24,7 +24,7 @@ function Login() {
                         setPassword(e.target.value);
                     }} />
                     <div className="submit">
-                        <AddBox />
+                        <ExitToApp />
                         <p>تسجيل الدخول</p>
                     </div>
                 </form>

@@ -14,9 +14,23 @@
     font-size: 30px;
 }
 
+.welcome p {
+    font-size: 13px;
+}
+
+.welcome span {
+    color: gray;
+}
+
+.welcome span:hover {
+    color: rgba(69, 176, 158, 1);
+}
+
 @media (min-width:426px) {
     .welcome h2 {
         font-size: 60px;
+        margin-left: 80px;
+        margin-bottom: 20px;
     }
 
     .welcome {
@@ -26,5 +40,14 @@
         flex-direction: column;
         padding: 0 150px;
         height: calc(100vh - 140px);
+    }
+
+    .welcome h3 {
+        margin-right: 80px;
+    }
+
+    .welcome p {
+
+        margin-top: 100px;
     }
 }
