@@ -1,0 +1,217 @@
+.login {
+    display: flex;
+    flex-direction: row-reverse;
+    background-image: url(../images/backgroundleft.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 40px;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #777;
+}
+
+.logo_green {
+    display: none;
+}
+
+.logo_white {
+    height: 350px;
+    margin-right: 60px;
+}
+
+.login_welcome {
+    flex: .4;
+    padding: 50px;
+    color: white;
+    font-size: 30px;
+}
+
+.form {
+    flex: .6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form .avatar {
+    height: 100px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0px 0px 2px black);
+}
+
+.form>form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.form>form .err.active {
+    color: red;
+    transition: .3s;
+}
+
+.form>form .err {
+    font-size: 10px;
+    color: transparent;
+    position: absolute;
+    top: -20px;
+    text-align: center;
+    transition: .3s;
+}
+
+.form>form input:not([type="checkbox"]) {
+    display: block;
+    border: 2px solid #45B09E;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 15px;
+    width: 60%;
+    border-radius: 10px;
+}
+
+.form>form input:focus {
+    outline: none;
+}
+
+.form>form>div:not(:last-of-type) {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    font-weight: bold;
+}
+
+.form>form>div:not(:last-of-type) label {
+    width: 40%;
+}
+
+.form>form>div:last-of-type {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+    font-weight: bold;
+}
+
+.form>form>div input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.submit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #45B09E;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 2px solid #45B09E;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: white;
+    color: #45B09E;
+}
+
+.submit p {
+    margin-left: 10px;
+}
+
+
+.form .new_account {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.form .new_account p {
+    margin-left: 20px;
+}
+
+.form .new_account a {
+    color: gray;
+    font-weight: bold;
+}
+
+.form .new_account a:hover {
+    color: #45B09E;
+}
+
+@media(max-width:768px) and (min-width:426px) {
+    .login {
+        height: 100vh;
+        background-color: #EAFFEE;
+    }
+}
+
+@media(max-width:768px) {
+    .login {
+        background-color: #EAFFEE;
+        margin: 0;
+        width: 100%;
+        border: none;
+        background-image: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .logo_green {
+        display: block;
+
+    }
+
+    .logo_white {
+        display: none;
+    }
+
+    .login_welcome {
+        padding: 0;
+        color: black;
+        font-size: 17px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+    }
+
+    .login_welcome::after {
+        content: "";
+        background-color: black;
+        height: 3px;
+        width: 75%;
+        position: absolute;
+        bottom: 30px;
+        right: 50%;
+        transform: translateX(50%);
+        border-radius: 10px;
+    }
+
+    .logo_green {
+        margin-top: 20px;
+        height: 150px;
+    }
+
+    .form {
+        width: 100%;
+        padding: 30px 0;
+    }
+
+    .form>form input:not([type="checkbox"]) {}
+
+    ::placeholder {
+        font-size: 13px;
+    }
+
+    .submit {
+        font-size: 13px;
+    }
+}

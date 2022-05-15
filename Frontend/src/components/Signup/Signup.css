@@ -1,0 +1,192 @@
+.signup {
+    display: flex;
+    flex-direction: row;
+    background-image: url(../images/backgroundrigth.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 40px;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #777;
+}
+
+.logo_green_up {
+    display: none;
+}
+
+.logo_white_up {
+    height: 350px;
+    margin-right: 60px;
+}
+
+.signup_welcome {
+    flex: .4;
+    padding: 50px;
+    color: white;
+    font-size: 30px;
+}
+
+.signup_form {
+    flex: .6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup_form form {
+    position: relative;
+}
+
+.signup_form>form .err.active {
+    color: red;
+    transition: .3s;
+}
+
+.signup_form>form .err {
+    color: transparent;
+    position: absolute;
+    top: -20px;
+    text-align: center;
+    transition: .3s;
+}
+
+.signup_form .avatar {
+    height: 100px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0px 0px 2px black);
+}
+
+.signup_form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+.signup_form form div:not(.submit) {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.signup_form input {
+    width: 40%;
+    border: 2px solid #45B09E;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.signup_form form div:nth-child(2) input {
+    width: 60%;
+}
+
+
+
+.signup_form .have_account {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.signup_form .have_account p {
+    margin-left: 20px;
+}
+
+.signup_form .have_account a {
+    color: gray;
+    font-weight: bold;
+}
+
+.signup_form .have_account a:hover {
+    color: #45B09E;
+}
+
+
+@media(max-width:768px) {
+    .signup {
+        background-color: #EAFFEE;
+        margin: 0;
+        width: 100%;
+        border: none;
+        background-image: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .logo_green_up {
+        display: block;
+
+    }
+
+    .logo_white_up {
+        display: none;
+    }
+
+    .signup_welcome {
+        padding: 0;
+        color: black;
+        font-size: 17px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+    }
+
+    .signup_welcome::after {
+        content: "";
+        background-color: black;
+        height: 3px;
+        width: 75%;
+        position: absolute;
+        bottom: 30px;
+        right: 50%;
+        transform: translateX(50%);
+        border-radius: 10px;
+    }
+
+    .logo_green_up {
+        margin-top: 20px;
+        height: 150px;
+    }
+
+    .signup_form {
+        width: 100%;
+        padding: 30px 0;
+    }
+
+    /* .signup_form>form>div:not(.submit) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .signup_form form div:nth-child(2) input,
+    .signup_form>form input {
+        width: 75%;
+    } */
+
+    ::placeholder {
+        font-size: 13px;
+    }
+
+    .submit {
+        font-size: 13px;
+    }
+}
+
+@media (max-width:425px) {
+    .signup_form>form>div:not(.submit) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .signup_form form div:nth-child(2) input,
+    .signup_form>form input {
+        width: 75%;
+    }
+}

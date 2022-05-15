@@ -1,0 +1,148 @@
+.beginner {
+    display: flex;
+    background-image: url("../images/backgroundrigth.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 30px;
+    height: 100vh;
+}
+
+
+.beginner_welcome {
+    width: 45%;
+    color: white;
+    font-size: 14px;
+}
+
+.beginner_logoWhite {
+    height: 280px;
+    margin: 70px auto;
+}
+
+.beginner_logoGreen {
+    display: none;
+}
+
+.beginner_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 55%;
+}
+
+.beginner_content .levels {
+    font-size: 15px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    border-bottom: 10px solid #45B09E;
+}
+
+.beginner .levels div {
+    background-color: #45B09E;
+    color: white;
+    display: flex;
+    padding: 10px;
+    border-radius: 13px;
+    margin: 20px auto;
+    cursor: pointer;
+    border: 2px solid #45B09E;
+    justify-content: space-between;
+    font-weight: bold;
+    width: 70%;
+
+}
+
+.beginner .levels div:hover {
+    background-color: #EAFFEE;
+    color: #45B09E;
+}
+
+.beginner_content>div:last-of-type {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.association_search {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.association_search select {
+    padding: 0 20px;
+}
+
+.associations>div>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logout {
+    background-color: #45B09E;
+    color: white;
+    display: flex;
+    padding: 5px 10px;
+    border-radius: 13px;
+    margin: 20px 0;
+    margin-left: 0;
+    margin-right: auto;
+    cursor: pointer;
+    border: 2px solid #45B09E;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    align-self: flex-end;
+}
+
+.logout:hover {
+    background-color: #EAFFEE;
+    color: #45B09E;
+}
+
+.logout p {
+    margin-left: 30px;
+}
+
+@media(max-width:768px) {
+    .beginner {
+        background-image: none;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        background-color: #EAFFEE;
+        height: fit-content;
+    }
+
+    .beginner_welcome {
+        width: 100%;
+        color: #45B09E;
+        display: flex;
+        flex-direction: column-reverse;
+        font-size: 15px;
+    }
+
+    .beginner_logoWhite {
+        display: none;
+    }
+
+    .beginner_logoGreen {
+        display: inline;
+        height: 100px;
+        width: 80px;
+    }
+
+    .beginner_content {
+        width: 100%;
+    }
+
+    .beginner_content .levels {
+        border-top: 10px solid #45B09E;
+    }
+}

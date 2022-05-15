@@ -1,0 +1,77 @@
+.about {
+    margin-top: 20px;
+    color: black;
+}
+
+.about>h2 {
+    font-size: 45px;
+    color: rgba(69, 176, 158, 1);
+}
+
+.about .content {
+    margin-top: 70px;
+    border-radius: 10px;
+    border: 2px solid rgba(69, 176, 158, 1);
+    padding: 30px 20px;
+}
+
+.content_content {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+}
+
+.content_content>div {
+    flex: .5;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(234, 255, 238, 1);
+    color: rgba(69, 176, 158, 1);
+    align-items: center;
+    text-align: center;
+}
+
+@media (max-width:425px) {
+    .about .content {
+        margin-top: 30px;
+        font-size: 16px;
+    }
+
+    .content_content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content_content>div {
+        margin: 20px 0;
+    }
+}
+
+.signupbtn,
+.go_to_advanced {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(69, 176, 158, 1);
+    color: white;
+    border: 2px solid rgba(69, 176, 158, 1);
+    border-radius: 15Px;
+    padding: 5PX 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.signupbtn:hover,
+.go_to_advanced:hover {
+    background-color: transparent;
+    color: rgba(69, 176, 158, 1);
+}
+
+.signupbtn p,
+.go_to_advanced p {
+    margin-left: 15px;
+    font-weight: bold;
+}
