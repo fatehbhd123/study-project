@@ -43,6 +43,7 @@
 }
 
 .signup_form>form .err {
+    font-size: 10px;
     color: transparent;
     position: absolute;
     top: -20px;

@@ -1,13 +1,8 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import Welcome from "./components/Welcome/Welcome"
-import About from "./components/About/About"
-import ContactUs from './components/ContactUs/ContactUs';
-import Footer from './components/Footer/Footer';
+
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
-import Landing from './components/Landing/Landing';
 import "./components/Landing/Landing.css"
 import "./components/Navbar/Navbar.css"
 import "./components/Welcome/Welcome.css"
@@ -17,32 +12,51 @@ import "./components/Footer/Footer.css"
 import "./components/Login/Login.css"
 import "./components/Signup/Signup.css"
 import "./components/Beginner/Beginner.css"
+import "./components/Level/Level.css"
+import "./components/Chapter/Chapter.css"
 import Advanced from './components/Advanced/Advanced';
 import Beginner from './components/Beginner/Beginner';
 import Chapter from './components/Chapter/Chapter';
 import Level from './components/Level/Level';
 import Association from './components/Association/Association';
+import HomePage from './components/HomePage/HomePage';
+import ErrorPage from "./components/ErrorPage/ErrorPage"
+import { useDispatch, useSelector } from 'react-redux';
+import { login, selectUser } from './components/features/userSlice';
+import { useEffect } from 'react';
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path='/'
-          element={<>
-            <Landing />
-            <About />
-            <ContactUs />
-            <Footer />
-          </>}
-        />
+  const user = useSelector(selectUser)
+  // console.log(user)
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      dispatch(login(
+        JSON.parse(localStorage.getItem('user'))
+      ))
+    } else if (localStorage.getItem('association')) {
+      dispatch(login(
+        JSON.parse(localStorage.getItem('association'))
+      ))
+    }
+    setTimeout(() => {
+    }, 2000);
+  }, [])
+  return (<>
+    <Routes>
+      <>
+        <Route path='/' element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/advanced' element={<Advanced />} />
-        <Route path='/beginner:username' element={<Beginner />} />
-        <Route path='/level:level/chapter/:title' element={<Chapter />} />
-        <Route path='/beginner:username/level:level' element={<Level />} />
-        <Route path="/association:username" element={<Association />} />
-      </Routes>
-    </Router>
+        {user && <Route path='/beginner' element={<Beginner />} />}
+        {user && <Route path='/beginner/level/chapter/:title' element={<Chapter />} />}
+        {user && <Route path='/beginner/level/:level' element={<Level />} />}
+        {user && <Route path="/association" element={<Association />} />}
+        <Route path='*' element={<ErrorPage />} />
+      </>
+    </Routes>
+  </>
   );
 }
 

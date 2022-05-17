@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import logoWhite from '../logo/منهاج المسلم White.png'
 import logoGrenn from "../logo/منهاج المسلم Green.png"
 import { Link, useNavigate } from 'react-router-dom'
-import { AddBox, ExitToApp } from '@mui/icons-material'
+import { AddBox } from '@mui/icons-material'
+import { useDispatch } from 'react-redux';
+import { login } from '../features/userSlice'
 import avatar from '../images/avatar.svg'
 import axios from 'axios'
 function Signup() {
+    let dispatch = useDispatch();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
@@ -13,8 +16,11 @@ function Signup() {
     const handlSubmit = async () => {
         try {
             const response = await axios.post('/adduser', { username: userName, password: password });
-            if (response.data === "Done") {
-                navigate('/beginner:' + userName)
+            console.log(response.data)
+            if (response.data.username) {
+                dispatch(login({ ...response.data }))
+                localStorage.setItem('user', JSON.stringify({ ...response.data }))
+                navigate('/beginner')
             } else {
                 setErrMsg(response.data)
             }
@@ -23,7 +29,19 @@ function Signup() {
             console.log(err)
         }
     }
-
+    useEffect(() => {
+        if (localStorage.getItem('user')) {
+            dispatch(login(
+                JSON.parse(localStorage.getItem('user'))
+            ))
+            navigate('/beginner')
+        } else if (localStorage.getItem('association')) {
+            dispatch(login(
+                JSON.parse(localStorage.getItem('association'))
+            ))
+            navigate('/association')
+        }
+    }, [])
     useEffect(() => {
         setErrMsg('');
     }, [userName, password]);
@@ -60,10 +78,8 @@ function Signup() {
                             setErrMsg('كلمة السر غير متوافقة');
                         }
                         else {
-                            console.log(userName);
-                            console.log(password);
+                            handlSubmit()
 
-                            handlSubmit();
                         }
                     }
 

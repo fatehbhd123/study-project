@@ -5,21 +5,37 @@ import logoGrenn from "../logo/منهاج المسلم Green.png"
 import avatar from '../images/avatar.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { login } from '../features/userSlice'
+import { useDispatch, useSelector } from 'react-redux';
 function Login() {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [assoc, setAssoc] = useState(false);
     let navigate = useNavigate();
+    let dispatch = useDispatch();
     const handleSubmitAssoc = async () => {
         try {
             const response = await axios.post('/associationsignin', { username: userName, password: password }
             );
-            console.log(response.message);
             if (response.data.length === 0) {
                 setErrMsg('يوجد خطأ في المعلومات')
             } else {
-                navigate(`/association:${userName}`);
+                dispatch(login(
+                    { ...response.data[0] }
+                ))
+                console.log(response.data);
+                localStorage.setItem("association", JSON.stringify(
+                    {
+                        level: response.data[0].level,
+                        password: response.data[0].password,
+                        username: response.data[0].username,
+                        __v: response.data[0].__v,
+                        uid: response.data[0]._id
+
+                    }
+                ))
+                navigate(`/association`);
             }
 
         } catch (err) {
@@ -30,17 +46,49 @@ function Login() {
         try {
             const response = await axios.post('/usersignin', { username: userName, password: password }
             );
-            console.log(response)
+            console.log(response.data)
             if (response.data.length === 0) {
                 setErrMsg('يوجد خطأ في المعلومات')
             } else {
-                navigate('/beginner:' + userName)
+                dispatch(login({
+                    level: response.data[0].level,
+                    password: response.data[0].password,
+                    username: response.data[0].username,
+                    __v: response.data[0].__v,
+                    uid: response.data[0]._id
+
+                }))
+                localStorage.setItem("user", JSON.stringify(
+                    {
+                        level: response.data[0].level,
+                        password: response.data[0].password,
+                        username: response.data[0].username,
+                        __v: response.data[0].__v,
+                        uid: response.data[0]._id
+
+                    }
+                ))
+                navigate('/beginner')
+                // console.log(response.data[0])
             }
 
         } catch (err) {
             console.log(err)
         }
     }
+    useEffect(() => {
+        if (localStorage.getItem('user')) {
+            dispatch(login(
+                JSON.parse(localStorage.getItem('user'))
+            ))
+            navigate('/beginner')
+        } else if (localStorage.getItem('association')) {
+            dispatch(login(
+                JSON.parse(localStorage.getItem('association'))
+            ))
+            navigate('/association')
+        }
+    }, [])
     useEffect(() => {
         setErrMsg('');
     }, [userName, password]);

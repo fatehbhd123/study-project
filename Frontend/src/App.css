@@ -24,6 +24,19 @@ body {
     background-size: contain; */
 }
 
+#root {
+    position: relative;
+    min-height: 100vh;
+}
+
+#root>.overlay {
+    background-color: #45B09E;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 200;
+}
+
 .container {
     margin-left: auto;
     margin-right: auto;

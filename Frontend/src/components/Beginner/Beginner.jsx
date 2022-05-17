@@ -1,30 +1,49 @@
 import logoWhite from "../logo/منهاج المسلم White.png";
 import logoGreen from "../logo/منهاج المسلم Green.png";
-import { Logout, MenuBook } from "@mui/icons-material";
+import { CheckSharp, Logout, MenuBook } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { logout, selectUser } from '../features/userSlice';
+import { useDispatch, useSelector } from "react-redux";
 export default function Beginner() {
     const [wilayas, setWilayas] = useState([]);
     const [associations, setAssociations] = useState([]);
-    const { username } = useParams();
+    const user = useSelector(selectUser);
+    let navigate = useNavigate();
+    let dispatch = useDispatch();
     useEffect(() => {
+
+        if (localStorage.getItem('association')) {
+            navigate('/association')
+        }
         const getData = async () => {
             const response = await axios.get('/association');
             console.log(response.data);
             setWilayas(response.data);
         }
         getData();
-        // console.log(wilayas)
     }, []);
-    let navigate = useNavigate();
+    const levelType = (level) => {
+        if (+level > +user.level + 1) {
+            return "blocked"
+        } else if (+level === +user.level + 1) {
+            return ""
+        } else {
+            return "checked"
+        }
+    }
     const Level = (level) => {
         return (
-            <div onClick={(e) => {
-                navigate(`/beginner${username}/level:${e.currentTarget.getAttribute('level')}`);
-            }} level={level}>
+            <div className={levelType(level)} onClick={(e) => {
+
+                if (!e.currentTarget.classList.contains('blocked')) {
+                    navigate(`/beginner/level/${e.currentTarget.getAttribute('level')}`)
+                }
+            }} level={level} >
                 <p>المستوى {level}</p>
-                <MenuBook />
+                <MenuBook className="book" />
+                <CheckSharp className="check" />
             </div >
         )
     }
@@ -56,7 +75,7 @@ export default function Beginner() {
                             }}>
                                 <option value="">إختر</option>
                                 {wilayas && wilayas.map((e, i) => {
-                                    return <option value={e.id} name={e.ar_name} key={i}>{e.ar_name}</option>
+                                    return <option value={e.id} name={e.ar_name} key={i}>{e.name}</option>
                                 })}
                             </select>
                         </div>
@@ -89,51 +108,14 @@ export default function Beginner() {
                             })}
                         </div>
                     </div>
-                    <div className="logout">
+                    <div className="logout" onClick={() => {
+                        dispatch(logout());
+                        localStorage.removeItem('user');
+                        navigate('/')
+                    }}>
                         <p>الخروج</p>
                         <Logout />
                     </div></div>
-
-
-                {/* <div className="association_info">
-                    <div className="association_search">
-                        <h4>
-                            تواصل مع واحدة الجمعيات حسب الولاية
-                        </h4>
-                        <select name="wilaya" id="" onChange={(e) => {
-                            setAssociations(wilayas.filter(wilaya => {
-                                return wilaya.id === e.target.value
-                            }));
-                        }}>
-                            <option value="">إختر</option>
-                            {wilayas && wilayas.map((e, i) => {
-                                return <option value={e.id} name={e.ar_name} key={i}>{e.ar_name}</option>
-                            })}
-                        </select>
-                    </div>
-                    <div className="associations">
-                        {associations.map(function ({ name, phone, _id, sunday, monday, tuesday, wednesday, thursday, friday, saturday }) {
-                            return (
-                                <div key={_id}>
-                                    <p>{name}</p>
-                                    <p>رقم الهاتف: {phone}</p>
-                                    <p>البرنامج:</p>
-                                    {sunday && <p>يوم الأحد : {sunday}</p>}
-                                    {monday && <p>يوم الإثنين : {monday}</p>}
-                                    {tuesday && <p>يوم الثلاثاء : {tuesday}</p>}
-                                    {wednesday && <p>يوم الأربعاء : {wednesday}</p>}
-                                    {thursday && <p>يوم الخميس : {thursday}</p>}
-                                    {friday && <p>يوم الجمعة : {friday}</p>}
-                                    {saturday && <p>يوم السبت : {saturday}</p>}
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div>
-                <div className="logout">
-                    <p>الخروج</p>
-                    <Logout />
-                </div> */}
             </div>
         </div>
     )
