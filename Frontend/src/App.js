@@ -14,12 +14,16 @@ import "./components/Signup/Signup.css"
 import "./components/Beginner/Beginner.css"
 import "./components/Level/Level.css"
 import "./components/Chapter/Chapter.css"
+import "./components/Advanced/Advanced.css"
+import "./components/AdvancedChapter/AdvancedChapter.css"
+import "./components/Association/Association.css"
 import Advanced from './components/Advanced/Advanced';
 import Beginner from './components/Beginner/Beginner';
 import Chapter from './components/Chapter/Chapter';
 import Level from './components/Level/Level';
 import Association from './components/Association/Association';
 import HomePage from './components/HomePage/HomePage';
+import AdvancedChapter from './components/AdvancedChapter/AdvancedChapter';
 import ErrorPage from "./components/ErrorPage/ErrorPage"
 import { useDispatch, useSelector } from 'react-redux';
 import { login, selectUser } from './components/features/userSlice';
@@ -53,6 +57,7 @@ function App() {
         {user && <Route path='/beginner/level/chapter/:title' element={<Chapter />} />}
         {user && <Route path='/beginner/level/:level' element={<Level />} />}
         {user && <Route path="/association" element={<Association />} />}
+        <Route path='/advanced/chapter/:title' element={<AdvancedChapter />} />
         <Route path='*' element={<ErrorPage />} />
       </>
     </Routes>

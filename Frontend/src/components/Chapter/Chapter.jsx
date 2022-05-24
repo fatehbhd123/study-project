@@ -20,8 +20,6 @@ function Chapter() {
         try {
             const response = await axios.post('/contentbytitle', { title: title }
             )
-            console.log(title);
-            console.log(response.data);
             setData(response.data[0]);
             setLink(response.data[0].link);
         }

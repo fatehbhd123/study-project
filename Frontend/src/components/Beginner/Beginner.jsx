@@ -1,14 +1,17 @@
 import logoWhite from "../logo/منهاج المسلم White.png";
 import logoGreen from "../logo/منهاج المسلم Green.png";
-import { CheckSharp, Logout, MenuBook } from "@mui/icons-material";
-import { useNavigate, useParams } from "react-router-dom";
+import { ChangeCircle, CheckSharp, Clear, Delete, Logout, MenuBook, Settings } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { logout, selectUser } from '../features/userSlice';
+import { login, logout, selectUser } from '../features/userSlice';
 import { useDispatch, useSelector } from "react-redux";
 export default function Beginner() {
     const [wilayas, setWilayas] = useState([]);
     const [associations, setAssociations] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const [password, setPassword] = useState('');
+    const [newPass, setNewPassword] = useState('');
     const user = useSelector(selectUser);
     let navigate = useNavigate();
     let dispatch = useDispatch();
@@ -49,6 +52,51 @@ export default function Beginner() {
     }
     return (
         <div className="beginner">
+            <div className={isOpen ? "beginner_overlay active" : "beginner_overlay"}></div>
+            <div className={isOpen ? "pop_up_delete active" : "pop_up_delete"}>
+                <Clear onClick={() => {
+                    setIsOpen(false);
+                }} style={{ cursor: "pointer" }} />
+                <h1 style={{ color: "#45B09E" }}>الإعدادات</h1>
+                <div>
+                    <label htmlFor="pass">كلمة السر الحالية</label>
+                    <input type="password" id="pass" value={password} onChange={(e) => {
+                        setPassword(e.target.value)
+                    }} />
+                </div>
+                <div>
+                    <label htmlFor="new_pass">كلمة السر الجديدة</label>
+                    <input type="password" id="new_pass" value={newPass} onChange={(e) => {
+                        setNewPassword(e.target.value)
+                    }} />
+                </div>
+                <div className="delete" onClick={async () => {
+                    const result = await axios.post('/deleteuser', { password: password, username: user.username })
+                    if (result.data === "deleted") {
+                        localStorage.removeItem('user');
+                        dispatch(logout());
+                        navigate('/')
+                    } else {
+                        alert("كلمة السر خاطئة")
+                    }
+                }}>
+                    <p>حذف الحساب</p>
+                    <Delete />
+                </div>
+                <div className="delete" onClick={async () => {
+                    const result = await axios.patch('/modifyuser', { password: password, username: user.username, newpassword: newPass })
+                    if (result.data === "password changed") {
+                        localStorage.setItem('user', JSON.stringify({ ...JSON.parse(localStorage.getItem('user')), password: newPass }))
+                        dispatch(login({ ...JSON.parse(localStorage.getItem('user')), password: newPass }))
+                    }
+                    else {
+                        alert('يوجد خطأ في كلمة السر')
+                    }
+                }}>
+                    <p>تغيير</p>
+                    <ChangeCircle />
+                </div>
+            </div>
             <div className="beginner_welcome">
                 <h1>أهلا بك في قسم تعلم أساسيات الدين</h1>
                 <img src={logoWhite} alt="منهاج المسلم " className="beginner_logoWhite" />
@@ -66,7 +114,7 @@ export default function Beginner() {
                     <div className="association_info">
                         <div className="association_search">
                             <h4>
-                                تواصل مع واحدة الجمعيات حسب الولاية
+                                تواصل مع واحدة من الجمعيات حسب الولاية  :
                             </h4>
                             <select name="wilaya" id="" onChange={(e) => {
                                 setAssociations(wilayas.filter(wilaya => {
@@ -80,7 +128,7 @@ export default function Beginner() {
                             </select>
                         </div>
                         <div className="associations">
-                            {associations.map(function ({ ar_name, name, phone, _id, sunday, monday, tuesday, wednesday, thursday, friday, saturday }) {
+                            {associations.map(function ({ ar_name, phone, _id, sunday, monday, tuesday, wednesday, thursday, friday, saturday }) {
                                 return (
                                     <div key={_id}>
                                         <div >
@@ -108,14 +156,23 @@ export default function Beginner() {
                             })}
                         </div>
                     </div>
-                    <div className="logout" onClick={() => {
-                        dispatch(logout());
-                        localStorage.removeItem('user');
-                        navigate('/')
-                    }}>
-                        <p>الخروج</p>
-                        <Logout />
-                    </div></div>
+                    <div>
+                        <div className="delete" onClick={() => {
+                            setIsOpen(true)
+                        }}>
+                            <p>الإعدادات</p>
+                            <Settings />
+                        </div>
+                        <div className="logout" onClick={() => {
+                            dispatch(logout());
+                            localStorage.removeItem('user');
+                            navigate('/')
+                        }}>
+                            <p>الخروج</p>
+                            <Logout />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -1,0 +1,81 @@
+.association {
+    background-image: url("../images/backgroundrigth.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.association .div1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.association .div1 h2 {
+    color: white;
+
+}
+
+@media(max-width:768px) {
+    .association {
+        background-image: none;
+        background-color: #eaffee;
+        background-image: linear-gradient(62deg, #eaffee 40%, #ffffff 91%);
+
+    }
+
+    .association .div1 h2 {
+        color: #45b09e;
+    }
+}
+
+@media(max-width:700px) {
+    .association .div1 {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .association {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.association .div2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: .5;
+    padding: 30px;
+}
+
+.association .div2 .input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 30px 0;
+}
+
+
+.association .div2 .program {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.association .div2 input {
+    padding: 6px;
+    border-radius: 10px;
+    border: 1px solid #45b09e;
+    margin: 5px;
+    font-size: 12px;
+}
+
+.association .div2 input:focus {
+    outline: none;
+}

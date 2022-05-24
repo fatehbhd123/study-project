@@ -51,7 +51,8 @@
 }
 
 .signupbtn,
-.go_to_advanced {
+.go_to_advanced,
+.custom_btn {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -65,7 +66,8 @@
 }
 
 .signupbtn:hover,
-.go_to_advanced:hover {
+.go_to_advanced:hover,
+.custom_btn:hover {
     background-color: transparent;
     color: rgba(69, 176, 158, 1);
 }

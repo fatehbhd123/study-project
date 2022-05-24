@@ -26,6 +26,7 @@ function Level() {
     const getData = async (level) => {
         try {
             const response = await axios.post('/contentbylevel', { level: level })
+            console.log(response.data);
             setData([...response.data, ...response.data, ...response.data, ...response.data])
         }
         catch (err) {
@@ -59,6 +60,7 @@ function Level() {
     useEffect(() => {
 
         if (level) {
+            console.log(level);
             getData(level)
         }
         if (localStorage.getItem('user')) {

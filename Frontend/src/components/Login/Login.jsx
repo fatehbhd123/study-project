@@ -27,11 +27,7 @@ function Login() {
                 console.log(response.data);
                 localStorage.setItem("association", JSON.stringify(
                     {
-                        level: response.data[0].level,
-                        password: response.data[0].password,
-                        username: response.data[0].username,
-                        __v: response.data[0].__v,
-                        uid: response.data[0]._id
+                        ...response.data[0]
 
                     }
                 ))
@@ -69,7 +65,6 @@ function Login() {
                     }
                 ))
                 navigate('/beginner')
-                // console.log(response.data[0])
             }
 
         } catch (err) {
