@@ -240,8 +240,7 @@ app.patch('/modifyuser', checkpassword, async (req, res) => {
 app.patch('/modifyassociation', async (req, res) => {
     try {
         await Association.updateOne({ username: req.body.username }, {
-            ar_name: req.body.ar_name, phone: req.body.phone, sunday: req.body.sunday,
-            monday: req.body.monday, tuesday: req.body.tuesday, wednesday: req.body.wednesday, thursday: req.body.thursday, friday: req.body.friday, saturday: req.body.saturday
+            ar_name: req.body.ar_name, phone: req.body.phone, facebook: req.body.facebook
         })
             .then(
                 res.send('saved')

@@ -27,7 +27,7 @@ function Level() {
         try {
             const response = await axios.post('/contentbylevel', { level: level })
             console.log(response.data);
-            setData([...response.data, ...response.data, ...response.data, ...response.data])
+            setData([...response.data])
         }
         catch (err) {
             console.log(err.message)

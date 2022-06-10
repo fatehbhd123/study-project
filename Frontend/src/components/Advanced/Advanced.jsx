@@ -122,7 +122,7 @@ function Advanced() {
 
                     </div>
                     <div className="left">
-                        <h3>تفسير الأحاديث</h3>
+                        <h3>معلومات عن الأحاديث</h3>
                         <label htmlFor="hadith">إبحث بالكلمات المفتاحية</label>
                         <input type="text" onChange={(e) => {
                             getAhadith(e.target.value);

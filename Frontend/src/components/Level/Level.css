@@ -104,8 +104,16 @@
 }
 
 @media (max-width:426px) {
+    .level_content h1 {
+        font-size: 22px;
+    }
+
+    .level_content p {
+        font-size: 13px;
+    }
+
     .level .container {
-        width: 95%;
+        padding: 0 10px;
     }
 
     .custom_header>img {

@@ -1,6 +1,6 @@
 import logoWhite from "../logo/منهاج المسلم White.png";
 import logoGreen from "../logo/منهاج المسلم Green.png";
-import { ChangeCircle, CheckSharp, Clear, Delete, Logout, MenuBook, Settings } from "@mui/icons-material";
+import { ChangeCircle, CheckSharp, Clear, Delete, Facebook, Logout, MenuBook, Settings } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -12,6 +12,7 @@ export default function Beginner() {
     const [isOpen, setIsOpen] = useState(false);
     const [password, setPassword] = useState('');
     const [newPass, setNewPassword] = useState('');
+    const [newPassConf, setNewPasswordConf] = useState('');
     const user = useSelector(selectUser);
     let navigate = useNavigate();
     let dispatch = useDispatch();
@@ -22,7 +23,7 @@ export default function Beginner() {
         }
         const getData = async () => {
             const response = await axios.get('/association');
-            console.log(response.data);
+            // console.log(response.data);
             setWilayas(response.data);
         }
         getData();
@@ -70,6 +71,12 @@ export default function Beginner() {
                         setNewPassword(e.target.value)
                     }} />
                 </div>
+                <div>
+                    <label htmlFor="new_pass_conf">كلمة السر الجديدة</label>
+                    <input type="password" id="new_pass_conf" value={newPassConf} onChange={(e) => {
+                        setNewPasswordConf(e.target.value)
+                    }} />
+                </div>
                 <div className="delete" onClick={async () => {
                     const result = await axios.post('/deleteuser', { password: password, username: user.username })
                     if (result.data === "deleted") {
@@ -84,13 +91,22 @@ export default function Beginner() {
                     <Delete />
                 </div>
                 <div className="delete" onClick={async () => {
-                    const result = await axios.patch('/modifyuser', { password: password, username: user.username, newpassword: newPass })
-                    if (result.data === "password changed") {
-                        localStorage.setItem('user', JSON.stringify({ ...JSON.parse(localStorage.getItem('user')), password: newPass }))
-                        dispatch(login({ ...JSON.parse(localStorage.getItem('user')), password: newPass }))
+                    if (newPass !== newPassConf) {
+                        alert('يوجد خطأ كلمة السر الجديدة')
+                    }
+                    else if (!new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$").test(newPass)) {
+                        alert(' يجب أن تحتوي كلمة السر على ثمانية أحرف على الأقل ، حرف كبير واحد على الأقل و حرف صغير واحد على الأقل ورقم واحد')
                     }
                     else {
-                        alert('يوجد خطأ في كلمة السر')
+                        const result = await axios.patch('/modifyuser', { password: password, username: user.username, newpassword: newPass })
+                        if (result.data === "password changed") {
+                            localStorage.setItem('user', JSON.stringify({ ...JSON.parse(localStorage.getItem('user')), password: newPass }))
+                            dispatch(login({ ...JSON.parse(localStorage.getItem('user')), password: newPass }))
+                            alert('تم التغيير بنجاح')
+                        }
+                        else {
+                            alert('يوجد خطأ في كلمة السر')
+                        }
                     }
                 }}>
                     <p>تغيير</p>
@@ -103,6 +119,22 @@ export default function Beginner() {
                 <img src={logoGreen} alt="منهاج المسلم " className="beginner_logoGreen" />
             </div>
             <div className="beginner_content">
+                <div style={{}}>
+                    <div className="custom_btn" onClick={() => {
+                        setIsOpen(true)
+                    }}>
+                        <p>الإعدادات</p>
+                        <Settings />
+                    </div>
+                    <div className="logout" onClick={() => {
+                        dispatch(logout());
+                        localStorage.removeItem('user');
+                        navigate('/')
+                    }}>
+                        <p>الخروج</p>
+                        <Logout />
+                    </div>
+                </div>
                 <div className="levels">
                     <h1>المستويات</h1>
                     {Level(1)}
@@ -128,48 +160,21 @@ export default function Beginner() {
                             </select>
                         </div>
                         <div className="associations">
-                            {associations.map(function ({ ar_name, phone, _id, sunday, monday, tuesday, wednesday, thursday, friday, saturday }) {
+                            {associations.map(function ({ ar_name, phone, _id, facebook }) {
                                 return (
                                     <div key={_id}>
                                         <div >
                                             <p>الإسم : {ar_name}</p>
                                             <p>رقم الهاتف: {phone}</p>
                                         </div>
-                                        {{ sunday, monday, tuesday, wednesday, thursday, friday, saturday } && <p>البرنامج:</p>}
-                                        <div>
-                                            {sunday && <p>يوم الأحد : {sunday}</p>}
-                                            {monday && <p>يوم الإثنين : {monday}</p>}
-                                        </div>
-                                        <div>
-                                            {tuesday && <p>يوم الثلاثاء : {tuesday}</p>}
-
-                                            {wednesday && <p>يوم الأربعاء : {wednesday}</p>}
-                                        </div>
-                                        <div>
-
-                                            {thursday && <p>يوم الخميس : {thursday}</p>}
-                                            {friday && <p>يوم الجمعة : {friday}</p>}
-                                        </div>
-                                        {saturday && <p>يوم السبت : {saturday}</p>}
+                                        {facebook &&
+                                            <div style={{ display: "flex", justifyContent: "space-around" }}>
+                                                <p>صفخة الفايسبوك</p>
+                                                <a href={facebook} target="_blank"><Facebook /></a>
+                                            </div>}
                                     </div>
                                 )
                             })}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="delete" onClick={() => {
-                            setIsOpen(true)
-                        }}>
-                            <p>الإعدادات</p>
-                            <Settings />
-                        </div>
-                        <div className="logout" onClick={() => {
-                            dispatch(logout());
-                            localStorage.removeItem('user');
-                            navigate('/')
-                        }}>
-                            <p>الخروج</p>
-                            <Logout />
                         </div>
                     </div>
                 </div>

@@ -28,8 +28,8 @@
 }
 
 .books a {
-    width: 230px;
-    padding: 20px;
+    width: 200px;
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,8 +44,8 @@
 }
 
 .books a img {
-    width: 100%;
-    height: 200px;
+    width: 90%;
+    height: 170px;
 }
 
 .books a h4 {

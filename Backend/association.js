@@ -30,34 +30,10 @@ const associationSchema = mongoose.Schema({
         type: String,
         required: false,
     },
-    sunday: {
+    facebook: {
         type: String,
         required: false,
-    },
-    monday: {
-        type: String,
-        required: false,
-    },
-    tuesday: {
-        type: String,
-        required: false,
-    },
-    wednesday: {
-        type: String,
-        required: false,
-    },
-    thursday: {
-        type: String,
-        required: false,
-    },
-    friday: {
-        type: String,
-        required: false,
-    },
-    saturday: {
-        type: String,
-        required: false,
-    },
+    }
 
 });
 module.exports = Association = mongoose.model("association", associationSchema)

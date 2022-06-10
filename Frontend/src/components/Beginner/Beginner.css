@@ -51,6 +51,12 @@
     width: 55%;
 }
 
+.beginner_content>div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
 .beginner_content .levels {
     font-size: 15px;
     width: 100%;
@@ -93,6 +99,14 @@
     background-color: #45B09E;
 }
 
+.beginner a {
+    color: #45B09E;
+}
+
+.beginner a:hover {
+    font-size: 20px;
+}
+
 .beginner .levels div:not(.checked) .check {
     display: none;
 }
@@ -119,15 +133,16 @@
     height: 100%;
 }
 
-.beginner_content>div:last-of-type>div:last-of-type {
+
+
+/* .beginner_content>div:last-of-type>div:last-of-type {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-}
+} */
 
 .association_search {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     display: flex;
     width: 100%;
     justify-content: space-evenly;
@@ -135,6 +150,12 @@
 
 .association_search select {
     padding: 0 20px;
+}
+
+.associations>div {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .associations>div>div {
@@ -154,7 +175,7 @@
     border-radius: 13px;
     margin: 10px 0;
     margin-left: 0;
-    margin-right: auto;
+    margin-right: 20px;
     cursor: pointer;
     border: 2px solid #45B09E;
     justify-content: space-between;
@@ -162,6 +183,7 @@
     font-weight: bold;
     align-self: flex-end;
     width: fit-content;
+    font-size: 12px;
 }
 
 .logout:hover,

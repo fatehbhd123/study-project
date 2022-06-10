@@ -77,9 +77,11 @@ function Signup() {
                         else if (password !== confirmedPassword) {
                             setErrMsg('كلمة السر غير متوافقة');
                         }
+                        else if (!new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$").test(password)) {
+                            alert(' يجب أن تحتوي كلمة السر على ثمانية أحرف على الأقل ، حرف كبير واحد على الأقل و حرف صغير واحد على الأقل ورقم واحد')
+                        }
                         else {
                             handlSubmit()
-
                         }
                     }
 
